@@ -24,7 +24,7 @@ fi
 # validate Gist URL
 if [[ "${gist_url}" != "http://$gist_url_base"* ]] && [[ "${gist_url}" != "https://$gist_url_base"* ]];then
 	echo
-	echo "gist_url must be a valid Gist URL (containing 'gist.github.com').Terminating... "
+	echo "gist_url must be a valid Gist URL (containing '$gist_url_base'). Terminating... "
 	echo
 	exit 1
 fi
@@ -33,7 +33,7 @@ echo
 echo "---------------------------------------------------"
 echo "--- Fetching raw Gist URL(s) from: ${gist_url}"
 echo
-echo -- "Warning messages from tidy command (disregard):"
+echo "--- Warning messages from tidy command (disregard):"
 
 temp_doc=$(curl -sSL "${gist_url}" | grep -Eoi '<a [^>]+>Raw</a>' | tidy -quiet)
 
