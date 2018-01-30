@@ -1,9 +1,9 @@
 # Remote Gist Bash Script Runner
 
-Very similar to the [Remote Gist Bash Script Runner](https://github.com/bitrise-io/steps-remote-script-runner) step, except that this one explicitly takes a main Gist URL, as opposed to a *raw* URL. This script infers the raw URL of your Gist from the main URL.
+Very similar to the [Remote Gist Bash Script Runner](https://github.com/bitrise-io/steps-remote-script-runner) step, except that this one explicitly takes a main Gist URL, as opposed to a *raw* URL. This script scrapes the raw URL(s) of your Gist from the content of the main URL, and then runs each of the scripts located those URLs.
 
-Step that downloads the content of the Gist url and runs it as a bash script.
 You must provide a valid Gist URL (*not* the raw URL).
+
 For example, a main URL may look like this:
 
 ```
