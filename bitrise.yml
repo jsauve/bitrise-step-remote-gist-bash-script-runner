@@ -8,7 +8,7 @@ workflows:
     steps:
     - path::./:
         inputs:
-        - script_url: https://gist.githubusercontent.com/viktorbenei/287d845c2fddd05eef18
+        - gist_url: https://gist.github.com/jsauve/dec05365cdf201637b9e1545852abe25
   # ----------------------------------------------------------------
   # --- workflow to Release a new version with auto version bump
   create-release:
