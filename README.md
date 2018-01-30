@@ -7,13 +7,13 @@ You must provide a valid Gist URL (*not* the raw URL).
 For example, a main URL may look like this:
 
 ```
-https://gist.github.com/jsauve/999de8763292147e465bed3203f42342
+https://gist.github.com/jsauve/dec05365cdf201637b9e1545852abe25
 ```
 
 ...whereas its raw URL may look look this:
 
 ```
-https://gist.githubusercontent.com/jsauve/999de8763292147e465bed3203f42342/raw/346b16b1048452680511379f435aee574dbb6d23/PrepareAppBundles.sh
+https://gist.githubusercontent.com/jsauve/dec05365cdf201637b9e1545852abe25/raw/d7bdd21f5f1cddd5342f5804173967a4bff414fc/HelloWorld1.sh
 ```
 
 You should be providing the *NON*-raw URL.
