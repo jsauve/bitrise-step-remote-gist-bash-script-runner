@@ -1,5 +1,7 @@
 #!/bin/bash
 
+gist_url_base="gist.github.com"
+
 echo
 echo "gist_url: ${gist_url}"
 
@@ -20,7 +22,7 @@ if [[ "${exit_on_failure}" != "0" ]] && [[ "${exit_on_failure}" != "1" ]]; then
 fi
 
 # validate Gist URL
-if [[ "${gist_url}" != "http://gist.github.com"* ]] && [[ "${gist_url}" != "https://gist.github.com"* ]];then
+if [[ "${gist_url}" != "http://$gist_url_base"* ]] && [[ "${gist_url}" != "https://$gist_url_base"* ]];then
 	echo
 	echo "gist_url must be a valid Gist URL (containing 'gist.github.com').Terminating... "
 	echo
@@ -51,10 +53,10 @@ j=1
 for i in "${raw_urls[@]}"
 do
 
-	raw_url="https://gist.githubusercontent.com$i"
+	raw_url="https://$gist_url_base$i"
 	echo
 	echo "---------------------------------------------------"
-	echo "--- Executing remote script #$j: $i"
+	echo "--- Executing remote script #$j: $raw_url"
 	echo
 	curl -sSL "${raw_url}" | bash
 	res_code=$?
