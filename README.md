@@ -10,7 +10,7 @@ For example, a main URL may look like this:
 https://gist.github.com/jsauve/dec05365cdf201637b9e1545852abe25
 ```
 
-...whereas its raw URL may look look this:
+...whereas a raw URL for one of the Gist files may look look this:
 
 ```
 https://gist.githubusercontent.com/jsauve/dec05365cdf201637b9e1545852abe25/raw/d7bdd21f5f1cddd5342f5804173967a4bff414fc/HelloWorld1.sh
