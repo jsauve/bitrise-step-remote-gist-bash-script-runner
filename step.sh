@@ -58,7 +58,7 @@ do
 	echo "---------------------------------------------------"
 	echo "--- Executing remote script #$j: $raw_url"
 	echo
-	curl -sSL "${raw_url}" | bash
+	bash -c "$(curl -sSL "${raw_url}")"
 	res_code=$?
 	if [ ${res_code} -ne 0 ] ; then
 		echo
