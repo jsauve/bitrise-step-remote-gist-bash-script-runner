@@ -64,7 +64,7 @@ do
 		echo
 		echo "--- [!] Script #$j returned with an error code: ${res_code}"
 		echo "---------------------------------------------------"
-		if [[ ${exit_on_failure} == "1" ]]; then
+		if [[ ${exit_on_failure} == "true" ]]; then
 			exit 1
 		fi
 		j=$(($j+1))
