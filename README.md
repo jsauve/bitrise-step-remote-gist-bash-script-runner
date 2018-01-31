@@ -2,7 +2,7 @@
 
 Very similar to the [Remote Bash Script Runner](https://github.com/bitrise-io/steps-remote-script-runner) step, except that this one explicitly takes a main Gist URL, as opposed to a *raw* URL. This script scrapes the raw URL(s) of your Gist files from the content of the main URL, and then runs each of the scripts located at those URLs, in the order that the files appear on the Gist page (which is alphabetical by filename).
 
-You must provide a valid Gist URL (*not* the raw URL).
+You must provide a valid main Gist URL (*not* the raw URL).
 
 For example, a main URL may look like this:
 
