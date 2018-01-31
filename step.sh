@@ -14,9 +14,9 @@ if [[ "${gist_url}" == "" ]]; then
 fi
 
 # Required input validation
-if [[ "${exit_on_failure}" != "0" ]] && [[ "${exit_on_failure}" != "1" ]]; then
+if [[ "${exit_on_failure}" != "true" ]] && [[ "${exit_on_failure}" != "false" ]]; then
 	echo
-	echo "exit_on_failure must be set to either 0 or 1. Terminating..."
+	echo "exit_on_failure must be set to either true or false. Terminating..."
 	echo
 	exit 1
 fi
@@ -65,6 +65,7 @@ do
 		echo "--- [!] Script #$j returned with an error code: ${res_code}"
 		echo "---------------------------------------------------"
 		if [[ ${exit_on_failure} == "true" ]]; then
+			echo "--- Since the exit_on_failure value is set to true in the remote gist bash runner step, we're terminating, and none of the subsequent files in the given gist will be run..."
 			exit 1
 		fi
 		j=$(($j+1))
