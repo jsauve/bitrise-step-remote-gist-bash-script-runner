@@ -27,7 +27,7 @@ workflows:
   # --- workflow to Release a new version
   create-release-version:
     envs:
-    - RELEASE_VERSION: 1.0.0
+    - RELEASE_VERSION: 1.0.4
     steps:
     - script:
         title:
