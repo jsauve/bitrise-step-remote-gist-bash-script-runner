@@ -27,12 +27,12 @@ inputs:
       description: |
         URL of a Github Gist that contains valid bash scripts(s). (A main Gist URL, *not* a _raw_ Gist URL.)
       is_required: true
-  - exit_on_failure: true
+  - exit_on_failure: "true"
     opts:
       title: "Exit this step if any remote scripts fail"
       description: |
         Defaults to *true*. If *true*, the step will exit with if any of the remote gist files fail to load or return a failure code (exit > 0). If *false*, subsequent gist files will attempt to load, even if previous ones fail. Note that Gists can contain more than one file.
       is_required: true
       value_options:
-      - true
-      - false
+      - "true"
+      - "false"
