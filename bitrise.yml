@@ -26,7 +26,7 @@ workflows:
     - path::./:
         title: "Remote Gist Runner Test"
         inputs:
-        - gist_url: https://gist.github.com/jsauve/dec05365cdf201637b9e1545852abe25
+        - gist_id: dec05365cdf201637b9e1545852abe25
 
   # ----------------------------------------------------------------
   # --- workflows to Share this step into a Step Library

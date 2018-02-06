@@ -1,82 +1,40 @@
-#!/bin/bash
+#!/usr/bin/env bash
+#
+# Downloads files of the given Github Gist and runs then as bash scripts.
 
-gist_url_base="gist.github.com"
+err() {
+  echo "error: $@" >&2
+  exit 1
+}
 
-echo
-echo "gist_url: ${gist_url}"
+cat << EOF
 
-# Required input validation
-if [[ "${gist_url}" == "" ]]; then
-	echo
-	echo "No gist_url provided as environment variable. Terminating..."
-	echo
-	exit 1
-fi
+Config:
+- gist_id: ${gist_id}
+- exit_on_failure: ${exit_on_failure}
 
-# Required input validation
-if [[ "${exit_on_failure}" != "true" ]] && [[ "${exit_on_failure}" != "false" ]]; then
-	echo
-	echo "exit_on_failure must be set to either true or false. Terminating..."
-	echo
-	exit 1
-fi
+EOF
 
-# validate Gist URL
-if [[ "${gist_url}" != "http://$gist_url_base"* ]] && [[ "${gist_url}" != "https://$gist_url_base"* ]];then
-	echo
-	echo "gist_url must be a valid Gist URL (containing '$gist_url_base'). Terminating... "
-	echo
-	exit 1
-fi
+[[ -n "${gist_id}" ]] || err "gist id is not specified"
+case "${exit_on_failure}" in
+  true) set -e ;;
+  false) set +e ;;
+  *) err "exit_on_failure should be true or false" ;;
+esac
 
-echo
-echo "---------------------------------------------------"
-echo "--- Fetching raw Gist URL(s) from: ${gist_url}"
-echo
-echo "--- Warning messages from tidy command (disregard):"
+gist_dir=$(mktemp -d)
+cleanup() {
+  rm -rf "${gist_dir}"
+}
+trap cleanup EXIT
 
-temp_doc=$(curl -sSL "${gist_url}" | grep -Eoi '<a [^>]+>Raw</a>' | tidy -quiet)
+export GIT_ASKPASS=:
+git clone "https://gist.github.com/${gist_id}.git" "${gist_dir}" >/dev/null 2>&1 \
+ || err "failed to get gist with id" "${gist_id}"
 
-file_count=$(echo $temp_doc | xmllint --html --xpath "count(//a/@href)" -)
-
-echo
-echo "--- # of Gist files found: $file_count"
-echo "---------------------------------------------------"
-
-declare -a raw_urls
-
-for (( i=1; i <= $file_count; i++ )); do 
-    raw_urls[$i]="$(echo $temp_doc | xmllint --html --xpath 'string(//a['$i']/@href)' -)"
-done
-
-j=1
-for i in "${raw_urls[@]}"
-do
-
-	raw_url="https://$gist_url_base$i"
-	echo
-	echo "---------------------------------------------------"
-	echo "--- Executing remote script #$j: $raw_url"
-	echo
-	bash -c "$(curl -sSL "${raw_url}")"
-	res_code=$?
-	if [ ${res_code} -ne 0 ] ; then
-		echo
-		echo "--- [!] Script #$j returned with an error code: ${res_code}"
-		echo "---------------------------------------------------"
-		if [[ ${exit_on_failure} == "true" ]]; then
-			echo "--- Since the exit_on_failure value is set to true in the remote gist bash runner step, we're terminating, and none of the subsequent files in the given gist will be run..."
-			exit 1
-		fi
-		j=$(($j+1))
-	else
-		echo
-		echo "--- Script #$j returned with a success code - OK"
-		echo "---------------------------------------------------"
-		echo
-		j=$(($j+1))
-	fi
-
+for i in ${gist_dir}/*; do
+  printf '\nExecuting script "%s"\n' "$(basename "${i}")"
+  bash "${i}"
 done
 
 exit 0
