@@ -1,9 +1,9 @@
 title: |-
   Remote Gist Bash Script Runner
 summary: |
-  Downloads the content of the given Github Gist and runs it as a bash script.
+  Downloads the files of the given Github Gist and runs them as bash scripts.
 description: |
-  Downloads the content of the given Github Gist and runs it as a bash script.
+  Downloads the files of the given Github Gist and runs them as bash scripts.
 website: https://github.com/jsauve/bitrise-step-remote-gist-bash-script-runner
 source_code_url: https://github.com/jsauve/bitrise-step-remote-gist-bash-script-runner
 support_url: https://github.com/jsauve/bitrise-step-remote-gist-bash-script-runner/issues
@@ -12,20 +12,18 @@ host_os_tags:
   - osx-10.10
 project_type_tags: []
 type_tags:
-  - script
-  - bash
-  - runner
+  - utility
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
 dependencies: []
 run_if: ""
 inputs:
-  - gist_url: ""
+  - gist_id: ""
     opts:
-      title: "Gist URL"
+      title: "Gist ID"
       description: |
-        URL of a Github Gist that contains valid bash scripts(s). (A main Gist URL, *not* a _raw_ Gist URL.)
+        The ID of a Github Gist that contains valid bash scripts(s). (You can get the Gist ID from the URL)
       is_required: true
   - exit_on_failure: "true"
     opts:
