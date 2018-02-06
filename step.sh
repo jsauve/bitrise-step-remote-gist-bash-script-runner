@@ -17,8 +17,8 @@ EOF
 
 [[ -n "${gist_id}" ]] || err "gist id is not specified"
 case "${exit_on_failure}" in
-  "true") set -e ;;
-  "false") set +e ;;
+  true) set -e ;;
+  false) set +e ;;
   *) err "exit_on_failure should be true or false" ;;
 esac
 
